@@ -1,0 +1,1 @@
+export const calculateAmountBTC = (amount: number) => (amount / 10650).toFixed(8);

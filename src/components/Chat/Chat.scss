@@ -1,0 +1,12 @@
+.chat {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #f6f7fb;
+  padding: 0 30px;
+
+  .chat-messages-list {
+    flex: 1;
+  }
+}

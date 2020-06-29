@@ -1,0 +1,41 @@
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #e6e6e6;
+  margin-bottom: 20px;
+
+  &__remove-trade-button {
+    background: #b3c0c8;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+
+    img {
+      display: inline-block;
+      width: 20px;
+      margin-top: 3px;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    margin-right: 40px;
+    text-align: center;
+  }
+
+  &__payment-method {
+    font-size: 20px;
+    color: #6e7178;
+    font-weight: 600;
+  }
+
+  &__interlocutor-name {
+    font-size: 18px;
+    color: 95989f;
+    font-weight: 600;
+  }
+}
