@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Available users
 
-chaanar@gmail.com / 1234
-alex@gmail.com / 2345
-ivan@gmail.com / 3456
-seller@gmail.com / 4567
+chaanar@gmail.com / 1234<br />
+alex@gmail.com / 2345<br />
+ivan@gmail.com / 3456<br />
+seller@gmail.com / 4567<br />
