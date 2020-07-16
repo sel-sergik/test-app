@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background: #30364e;
+  color: #fff;
+  .logo {
+    display: inline-block;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        color: #ccc;
+      }
+    }
+
+    h2 {
+      margin: 0 20px;
+    }
+  }
+}

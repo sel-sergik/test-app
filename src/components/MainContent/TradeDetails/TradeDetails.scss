@@ -1,0 +1,40 @@
+.trade-details {
+  width: 25%;
+  padding: 15px;
+  text-align: center;
+  box-shadow: -8px 0px 10px -5px rgba(221, 221, 221, 1);
+}
+
+.details-menu {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .trade-details {
+    width: 230px;
+    min-height: calc(100vh - 100px);
+    position: absolute;
+    right: 0;
+    background: #fff;
+    padding-top: 50px;
+    z-index: 1;
+    box-sizing: border-box;
+
+    &--disabled {
+      display: none;
+    }
+  }
+
+  .details-menu {
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    z-index: 2;
+
+    &__icon {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

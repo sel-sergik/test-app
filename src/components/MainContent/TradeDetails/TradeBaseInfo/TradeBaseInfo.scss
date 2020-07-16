@@ -1,0 +1,45 @@
+.trade-details {
+  &__trade-with {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  &__buyer-name {
+    font-weight: 600;
+  }
+
+  &__start-time {
+    color: #a9a9a9;
+  }
+
+  &__paid-button {
+    font-size: 18px;
+    width: 200px;
+    background: #52d48c;
+    border: 1px solid #53c087;
+    border-radius: 20px;
+    padding: 8px 0;
+    margin: 40px 0;
+    color: #fff;
+    cursor: pointer;
+
+    &[disabled] {
+      cursor: auto;
+      background: #cfcfcf;
+      border: 1px solid #a9a9a9;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .trade-details {
+    &__trade-with,
+    &__start-time {
+      font-size: 14px;
+    }
+
+    &__paid-button {
+      margin: 20px 0;
+    }
+  }
+}

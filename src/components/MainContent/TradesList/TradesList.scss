@@ -1,0 +1,38 @@
+.trades-list {
+  position: relative;
+  width: 25%;
+  background: #fff;
+  box-shadow: 8px 0px 10px -5px rgba(221, 221, 221, 1);
+}
+
+.trades-menu {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .trades-list {
+    width: 200px;
+    min-height: calc(100vh - 100px);
+    position: absolute;
+    padding-top: 50px;
+    z-index: 1;
+    box-sizing: border-box;
+
+    &--disabled {
+      display: none;
+    }
+  }
+
+  .trades-menu {
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    z-index: 2;
+
+    &__icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

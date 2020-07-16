@@ -1,0 +1,62 @@
+.trade-details {
+  &__status-info,
+  &__hash-value,
+  &__amount-value {
+    color: #a9a9a9;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__info-row {
+    display: flex;
+  }
+
+  &__info-buyer,
+  &__status,
+  &__amount-usd,
+  &__num-trades,
+  &__hash,
+  &__amount-btc {
+    width: 50%;
+    border-bottom: 2px solid #f3f5f4;
+    padding: 15px 0;
+  }
+
+  &__info-buyer,
+  &__status,
+  &__amount-usd {
+    border-right: 2px solid #f3f5f4;
+  }
+
+  &__label {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__info-buyer-pos-reputation {
+    color: #97d361;
+    font-weight: 600;
+  }
+
+  &__info-buyer-neg-reputation {
+    color: #be3040;
+    font-weight: 600;
+  }
+
+  .paid {
+    color: #52d48c;
+  }
+}
+
+@media (max-width: 767px) {
+  .trade-details {
+    &__label {
+      font-size: 12px;
+    }
+  }
+}

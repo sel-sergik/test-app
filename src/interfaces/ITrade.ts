@@ -1,25 +1,11 @@
-import { IUser } from 'interfaces';
-import { TPaymentMethod } from 'types';
+import { IUser } from '@interfaces/IUser';
+import { PaymentMethods } from '@interfaces/PaymentMethods';
 
 export interface ITrade {
   id: number;
   buyer: IUser;
   seller: IUser;
-  paymentMethod: TPaymentMethod;
+  paymentMethod: PaymentMethods;
   amount: number;
   isPaid: boolean;
-  hasUnreadMessages: boolean;
-}
-
-export interface ITradeProps {
-  id: number;
-  buyer: IUser;
-  seller: IUser;
-  paymentMethod: TPaymentMethod;
-  amount: number;
-  isPaid: boolean;
-  hasUnreadMessages: boolean;
-  currentUserId: number;
-  activeTradeId: number;
-  tradeClick: (tradeId: number) => void;
 }

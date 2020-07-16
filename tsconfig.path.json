@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+     "baseUrl": "./src",
+     "paths": {
+        "@components/*": ["components/*"],
+        "@constants/*": ["constants/*"],
+        "@containers/*": ["containers/*"],
+        "@interfaces/*": ["interfaces/*"],
+        "@mocks/*": ["mocks/*"],
+        "@routes/*": ["routes/*"],
+        "@selectors/*": ["selectors/*"],
+        "@services/*": ["services/*"],
+        "@store/*": ["store/*"],
+        "@hooks/*": ["hooks/*"]
+     }
+  }
+}
