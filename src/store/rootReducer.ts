@@ -19,6 +19,6 @@ const createRootReducer = (history: History) =>
     currentUser: loginReducer,
     tradeDetails: tradeDetailsReducer,
     tradeChats: tradeChatsReducer,
-    btcRate: btcRateReducer
+    btcRate: btcRateReducer,
   });
 export default createRootReducer;

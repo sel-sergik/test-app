@@ -23,19 +23,31 @@ export const ChatMessage = ({
   message,
   time,
 }: IChatMessageProps) => {
-  const messageClass = useMemo(() => 
-    `chat-message ${userId === currentUserId ? 'message-left' : 'message-right'}`, [userId, currentUserId]);
-  const formattedTime = useMemo(() => new Date(time).toLocaleString('ru-Ru', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  }), [time]);
-  const avatar = useMemo(() => 
-    `/img/${userId === seller?.id ? seller?.avatar : buyer?.avatar}`
-  , [userId, seller, buyer]);
+  const { id: sellerId, avatar: sellerAvatar } = seller;
+  const { avatar: buyerAvatar } = buyer;
+  const messageClass = useMemo(
+    () =>
+      `chat-message ${
+        userId === currentUserId ? 'message-left' : 'message-right'
+      }`,
+    [userId, currentUserId]
+  );
+  const formattedTime = useMemo(
+    () =>
+      new Date(time).toLocaleString('ru-Ru', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }),
+    [time]
+  );
+  const avatar = useMemo(
+    () => `/img/${userId === sellerId ? sellerAvatar : buyerAvatar}`,
+    [userId, sellerId, sellerAvatar, buyerAvatar]
+  );
 
   return (
     <div className={messageClass}>

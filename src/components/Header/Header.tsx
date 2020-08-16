@@ -4,7 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import { Login } from '@components/Header/Login/Login';
 
-import { setActiveTradeAction, clearTradeDetailsAction } from '@store/actions/tradesActions';
+import {
+  setActiveTradeAction,
+  clearTradeDetailsAction,
+} from '@store/actions/tradesActions';
 
 import { routesMap } from '@routes/routes';
 
@@ -16,7 +19,7 @@ export const Header = () => {
   const logoClickHandler = useCallback(() => {
     dispatch(setActiveTradeAction(null));
     dispatch(clearTradeDetailsAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <header>

@@ -3,6 +3,10 @@
   padding: 20px;
   border-bottom: 1px solid #e6e6e6;
 
+  &:focus {
+    outline: none;
+  }
+
   &--active {
     width: calc(100% + 20px);
     padding-left: 40px;

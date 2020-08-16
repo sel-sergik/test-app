@@ -1,4 +1,10 @@
-import React, { useState, SyntheticEvent, ChangeEvent, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  SyntheticEvent,
+  ChangeEvent,
+  useCallback,
+  useMemo,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
@@ -17,31 +23,35 @@ export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const validateForm = useCallback(() => 
-    email.length > 0 && password.length > 0, [email, password]);
+  const validateForm = useCallback(
+    () => email.length > 0 && password.length > 0,
+    [email, password]
+  );
 
-  const formIsInvalid = useMemo(() => 
-    !validateForm(), [validateForm]);
+  const formIsInvalid = useMemo(() => !validateForm(), [validateForm]);
 
-  const handleSubmit = useCallback((event: SyntheticEvent) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event: SyntheticEvent) => {
+      event.preventDefault();
 
-    const user = findUser(email, password);
+      const user = findUser(email, password);
 
-    if (user) {
-      dispatch(setCurrentUserAction(user));
-      setCurrentUserToStorage(user);
-      history.push('/');
-    } else {
-      setAuthFailed(true);
-    }
-  }, [email, password]);
+      if (user) {
+        dispatch(setCurrentUserAction(user));
+        setCurrentUserToStorage(user);
+        history.push('/');
+      } else {
+        setAuthFailed(true);
+      }
+    },
+    [email, password, dispatch, history]
+  );
 
-  const handleEmailChange = 
-    (event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setEmail(event.target.value);
 
-  const handlePasswordChange = 
-    (event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setPassword(event.target.value);
 
   return (
     <div className="login-form">

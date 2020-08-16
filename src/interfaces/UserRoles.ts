@@ -1,4 +1,4 @@
 export enum UserRoles {
   'BUYER' = 1,
-  'SELLER' = 2
+  'SELLER' = 2,
 }

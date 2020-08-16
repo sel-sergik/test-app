@@ -26,11 +26,13 @@ export const TradeAdvancedInfo = ({
   buyerNumberOfTrades,
   tradeIsPaid,
   tradeHash,
-  amount
+  amount,
 }: ITradeAdvancedInfoProps) => {
   const btcRate = useSelector(btcRateSelector);
-  const amountBTC = useMemo(() => 
-    calculateAmountBTC(amount, btcRate), [amount, btcRate]);
+  const amountBTC = useMemo(() => calculateAmountBTC(amount, btcRate), [
+    amount,
+    btcRate,
+  ]);
 
   return (
     <div className="trade-details__info">
@@ -77,9 +79,7 @@ export const TradeAdvancedInfo = ({
         </div>
         <div className="trade-details__amount-btc">
           <div className="trade-details__label">Amount BTC</div>
-          <div className="trade-details__amount-value">
-            {amountBTC}
-          </div>
+          <div className="trade-details__amount-value">{amountBTC}</div>
         </div>
       </div>
     </div>

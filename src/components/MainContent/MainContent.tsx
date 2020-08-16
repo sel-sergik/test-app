@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { of } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
+import { switchMap, catchError } from 'rxjs/operators';
 
 import { ITradeDetails } from '@interfaces/ITradeDetails';
 import { IUser } from '@interfaces/IUser';
@@ -18,7 +21,7 @@ import { setBTCRateAction } from '@store/actions/btcAction';
 import { isObjectEmpty } from '@services/sharedService';
 import { getCurrentUserFromStorage } from '@services/storageService';
 
-import { useTimeout } from '@hooks/useInterval';
+import { useTimeout } from '@hooks/useTimeout';
 
 import './MainContent.scss';
 
@@ -35,26 +38,42 @@ export const MainContent: React.FC<IMainContentProps> = ({ match }) => {
   const currentUser: IUser = useSelector(currentUserSelector);
   const tradeDetails: ITradeDetails = useSelector(tradeDetailsSelector);
   const currentUserFromLocalStorage = getCurrentUserFromStorage();
-  const tradeDetailsExist = 
-    useMemo(() => !isObjectEmpty(tradeDetails), [tradeDetails]);
+  const tradeDetailsExist = useMemo(() => !isObjectEmpty(tradeDetails), [
+    tradeDetails,
+  ]);
 
   useEffect(() => {
     const tradeId = Number(match?.tradeID);
 
     !isNaN(tradeId) && dispatch(setActiveTradeAction(tradeId));
-  }, [match]);
+  }, [match, dispatch]);
 
   useEffect(() => {
-    !currentUser && currentUserFromLocalStorage &&
+    !currentUser &&
+      currentUserFromLocalStorage &&
       dispatch(setCurrentUserAction(JSON.parse(currentUserFromLocalStorage)));
-  }, [currentUser, currentUserFromLocalStorage]);
-  
+  }, [currentUser, currentUserFromLocalStorage, dispatch]);
+
   useTimeout(() => {
-    fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json')
-      .then(res => res.json())
-      .then(res => {
-        dispatch(setBTCRateAction(res.bpi.USD.rate_float));
-      });
+    const price$ = fromFetch(
+      'https://api.coindesk.com/v1/bpi/currentprice/USD.json'
+    ).pipe(
+      switchMap((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return of({ error: true, message: `Error ${response.status}` });
+      }),
+      catchError((err) => {
+        // eslint-disable-next-line no-console
+        console.error(err);
+        return of({ error: true, message: err.message });
+      })
+    );
+
+    price$.subscribe((priceData) =>
+      dispatch(setBTCRateAction(priceData.bpi.USD.rate_float))
+    );
   }, 0);
 
   return (

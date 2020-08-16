@@ -23,10 +23,16 @@ export const ChatHeader = ({
       className="chat-header__remove-trade-button"
       onClick={removeTradeHandler}
     >
-      <img src="/img/remove-icon.png" className='chat-header__remove-icon' alt="remove trade icon" />
+      <img
+        src="/img/remove-icon.png"
+        className="chat-header__remove-icon"
+        alt="remove trade icon"
+      />
     </button>
     <div className="chat-header__info">
-      <p className="chat-header__payment-method">{PAYMENT_METHODS_NAMES[paymentMethod]}</p>
+      <p className="chat-header__payment-method">
+        {PAYMENT_METHODS_NAMES[paymentMethod]}
+      </p>
       <p className="chat-header__interlocutor-name">{interlocutorName}</p>
     </div>
   </div>

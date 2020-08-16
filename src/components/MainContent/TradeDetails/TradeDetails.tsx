@@ -40,9 +40,10 @@ export const TradeDetails = ({
   const tradeIsPaid = useSelector(tradeIsPaidSelector(tradeId));
   const iconPath = open ? '/img/close-icon.png' : '/img/details-icon.png';
 
-  const buttonClickHandler = useCallback(() =>
-    dispatch(updateTradesAction(tradeId))
-  , [tradeId]);
+  const buttonClickHandler = useCallback(
+    () => dispatch(updateTradesAction(tradeId)),
+    [tradeId, dispatch]
+  );
 
   const detailsClickHandler = () => setOpen(!open);
 
@@ -50,16 +51,24 @@ export const TradeDetails = ({
     <>
       {!isBuyer ? (
         <>
-          <span 
-            className='details-menu'
+          <span
+            className="details-menu"
             onClick={detailsClickHandler}
             onKeyDown={detailsClickHandler}
-            role='button'
+            role="button"
             tabIndex={0}
           >
-            <img className='details-menu__icon' src={iconPath} alt='details menu icon' />
+            <img
+              className="details-menu__icon"
+              src={iconPath}
+              alt="details menu icon"
+            />
           </span>
-          <div className={`trade-details${!open ? ' trade-details--disabled' : ''}`}>
+          <div
+            className={`trade-details${
+              !open ? ' trade-details--disabled' : ''
+            }`}
+          >
             <TradeBaseInfo
               name={buyer?.name as string}
               buttonClick={buttonClickHandler}

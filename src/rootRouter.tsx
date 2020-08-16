@@ -20,9 +20,7 @@ export const Routes = () => (
       <Route
         path={routesMap.tradeID.route}
         exact={true}
-        render={(routeProps) => (
-          <MainContent match={routeProps.match.params} />
-        )}
+        render={(routeProps) => <MainContent match={routeProps.match.params} />}
       />
       <Route component={() => <div>Page Not Found</div>} />
     </Switch>

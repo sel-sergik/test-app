@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 
@@ -6,7 +6,10 @@ import { routesMap } from '@routes/routes';
 
 import { currentUserSelector } from '@selectors/usersSelectors';
 
-import { setActiveTradeAction, clearTradeDetailsAction } from '@store/actions/tradesActions';
+import {
+  setActiveTradeAction,
+  clearTradeDetailsAction,
+} from '@store/actions/tradesActions';
 import { setCurrentUserAction } from '@store/actions/loginActions';
 
 import { removeCurrentUserFromStorage } from '@services/storageService';
@@ -18,18 +21,17 @@ export const Login = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(currentUserSelector);
 
-  const logoutHandler = useCallback((event: SyntheticEvent) => {
+  const logoutHandler = useCallback(() => {
     removeCurrentUserFromStorage();
     dispatch(setCurrentUserAction(null));
     dispatch(setActiveTradeAction(null));
     dispatch(clearTradeDetailsAction());
     history.push('/');
-  }, []
-  );
+  }, [dispatch, history]);
 
   return (
     <div className="login-action">
-      <NavLink 
+      <NavLink
         to={currentUser ? routesMap.home.route : routesMap.login.route}
         onClick={currentUser ? logoutHandler : () => null}
       >

@@ -51,7 +51,7 @@ export const TRADES = [
     },
     paymentMethod: PaymentMethods.AMAZON,
     amount: 77,
-    isPaid: true
+    isPaid: true,
   },
   {
     id: 2,
@@ -67,7 +67,7 @@ export const TRADES = [
     },
     paymentMethod: PaymentMethods.ITUNES,
     amount: 30,
-    isPaid: false
+    isPaid: false,
   },
   {
     id: 3,
@@ -83,7 +83,7 @@ export const TRADES = [
     },
     paymentMethod: PaymentMethods.ITUNES,
     amount: 45,
-    isPaid: true
+    isPaid: true,
   },
   {
     id: 4,
@@ -99,7 +99,7 @@ export const TRADES = [
     },
     paymentMethod: PaymentMethods.PAYPAL,
     amount: 12,
-    isPaid: false
+    isPaid: false,
   },
 ];
 

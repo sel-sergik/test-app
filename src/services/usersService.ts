@@ -20,5 +20,5 @@ export const findUser = (email: string, password: string) => {
 export const findUserById = (id: number) =>
   USERS.find((user) => user.id === id);
 
-export const isSeller = (id: number) => 
+export const isSeller = (id: number) =>
   findUserById(id)?.role === UserRoles.SELLER;

@@ -25,12 +25,12 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-scroll": "^1.8.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
+    "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
+    "rxjs": "^6.6.2",
     "typescript": "^3.7.5"
   },
   "scripts": {

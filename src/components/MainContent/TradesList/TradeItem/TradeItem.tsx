@@ -15,7 +15,7 @@ import { Avatar } from '@components/base/Avatar/Avatar';
 import './TradeItem.scss';
 
 interface ITradeProps {
-  id: number; 
+  id: number;
   buyer: IUser;
   seller: IUser;
   paymentMethod: PaymentMethods;
@@ -37,34 +37,49 @@ export const TradeItem = ({
   currentUserId,
   activeTradeId,
   btcRate,
-  tradeClick
+  tradeClick,
 }: ITradeProps) => {
-  const unReadMessages = 
-    useSelector(chatUnreadMessagesSelector(id, currentUserId));
-  const paid = useMemo(() => isPaid ? 'Paid' : 'Not Paid', [isPaid]);
-  const isBuyer = useMemo(() => 
-    buyer.id === currentUserId, [buyer, currentUserId]);
-  const avatar = useMemo(() => 
-    `/img/${isBuyer ? seller.avatar : buyer.avatar}`, [isBuyer, seller, buyer]);
-  const cardClass = useMemo(() => `trade-item${
-    id === activeTradeId ? ' trade-item--active' : ''
-  }`, [id, activeTradeId]);
-  const paidClass = useMemo(() => `trade-item__paid${
-    isPaid ? ' trade-item__paid--active' : ''
-  }`, [isPaid]);
-  const indicatorClass = useMemo(() => `trade-item__messages-indicator${
-    unReadMessages?.length ? ' has-messages' : ''
-  }`, [unReadMessages?.length]);
-  const amountValue = useMemo(() => `${amount} USD (${calculateAmountBTC(amount, btcRate)} BTC)`, [amount, btcRate]);
+  const unReadMessages = useSelector(
+    chatUnreadMessagesSelector(id, currentUserId)
+  );
+  const hasUnReadMessages = unReadMessages?.length;
+  const paid = useMemo(() => (isPaid ? 'Paid' : 'Not Paid'), [isPaid]);
+  const isBuyer = useMemo(() => buyer.id === currentUserId, [
+    buyer,
+    currentUserId,
+  ]);
+  const avatar = useMemo(
+    () => `/img/${isBuyer ? seller.avatar : buyer.avatar}`,
+    [isBuyer, seller, buyer]
+  );
+  const cardClass = useMemo(
+    () => `trade-item${id === activeTradeId ? ' trade-item--active' : ''}`,
+    [id, activeTradeId]
+  );
+  const paidClass = useMemo(
+    () => `trade-item__paid${isPaid ? ' trade-item__paid--active' : ''}`,
+    [isPaid]
+  );
+  const indicatorClass = useMemo(
+    () =>
+      `trade-item__messages-indicator${
+        hasUnReadMessages ? ' has-messages' : ''
+      }`,
+    [hasUnReadMessages]
+  );
+  const amountValue = useMemo(
+    () => `${amount} USD (${calculateAmountBTC(amount, btcRate)} BTC)`,
+    [amount, btcRate]
+  );
 
   const clickHandler = useCallback(() => tradeClick(id), [id, tradeClick]);
 
   return (
-    <div 
+    <div
       className={cardClass}
       onClick={clickHandler}
       onKeyDown={clickHandler}
-      role='button'
+      role="button"
       tabIndex={0}
     >
       <span className={indicatorClass} />

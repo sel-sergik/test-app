@@ -1,10 +1,19 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { animateScroll } from "react-scroll";
 
-import { activeTradeIdSelector, relatedTradeSelector, chatReadMessagesSelector, chatUnreadMessagesSelector, interlocutorNameSelector } from '@selectors/tradesSelectors';
+import {
+  activeTradeIdSelector,
+  relatedTradeSelector,
+  chatReadMessagesSelector,
+  chatUnreadMessagesSelector,
+  interlocutorNameSelector,
+} from '@selectors/tradesSelectors';
 
-import { removeTradeAction, setActiveTradeAction, markMessagesAction } from '@store/actions/tradesActions';
+import {
+  removeTradeAction,
+  setActiveTradeAction,
+  markMessagesAction,
+} from '@store/actions/tradesActions';
 
 import { IMessage } from '@interfaces/IMessage';
 import { IUser } from '@interfaces/IUser';
@@ -20,32 +29,31 @@ interface IChatProps {
   currentUserId: number;
 }
 
-const Chat = ({
-  currentUserId
-}: IChatProps) => {
+const Chat = ({ currentUserId }: IChatProps) => {
   const dispatch = useDispatch();
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const activeTradeId: number = useSelector(activeTradeIdSelector);
   const readMessages = useSelector(
     chatReadMessagesSelector(activeTradeId, currentUserId)
   );
-  const unReadMessages = 
-    useSelector(chatUnreadMessagesSelector(activeTradeId, currentUserId));
-  const relatedTrade = useSelector(relatedTradeSelector(activeTradeId));
-  const interlocutorName = 
-    useSelector(interlocutorNameSelector(currentUserId, activeTradeId));
-
-  const removeTradeHandler = useCallback(
-    () => {
-      dispatch(removeTradeAction(activeTradeId));
-      dispatch(setActiveTradeAction(null));
-    },
-    [activeTradeId],
+  const unReadMessages = useSelector(
+    chatUnreadMessagesSelector(activeTradeId, currentUserId)
   );
+  const relatedTrade = useSelector(relatedTradeSelector(activeTradeId));
+  const interlocutorName = useSelector(
+    interlocutorNameSelector(currentUserId, activeTradeId)
+  );
+  const seller = relatedTrade?.seller as IUser;
+  const buyer = relatedTrade?.buyer as IUser;
+  const interlocutorId = seller?.id === currentUserId ? buyer?.id : seller?.id;
 
-  const  scrollToBottom = () => {
-    animateScroll.scrollToBottom({
-      containerId: 'scroll-container'
-    });
+  const removeTradeHandler = useCallback(() => {
+    dispatch(removeTradeAction(activeTradeId));
+    dispatch(setActiveTradeAction(null));
+  }, [activeTradeId, dispatch]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const showMessages = (messages: Array<IMessage>) =>
@@ -54,24 +62,29 @@ const Chat = ({
         <ChatMessage
           key={`message-${index}`}
           currentUserId={currentUserId}
-          seller={relatedTrade?.seller as IUser}
-          buyer={relatedTrade?.buyer as IUser}
+          seller={seller}
+          buyer={buyer}
           {...message}
         />
       );
     });
 
   useEffect(() => {
-    activeTradeId && setTimeout(() => dispatch(
-      markMessagesAction({ currentUserId, tradeId: activeTradeId })
-    ), 3000);
-  }, [activeTradeId, currentUserId]);
+    activeTradeId &&
+      setTimeout(
+        () =>
+          dispatch(
+            markMessagesAction({ currentUserId, tradeId: activeTradeId })
+          ),
+        3000
+      );
+  }, [activeTradeId, currentUserId, dispatch]);
 
-  useEffect(scrollToBottom, [readMessages?.length]);
+  useEffect(scrollToBottom, [readMessages?.length, unReadMessages?.length]);
 
   return (
     <>
-      {activeTradeId && (
+      {activeTradeId && relatedTrade ? (
         <div className="chat">
           <ChatHeader
             paymentMethod={relatedTrade?.paymentMethod as PaymentMethods}
@@ -79,7 +92,7 @@ const Chat = ({
             removeTradeHandler={removeTradeHandler}
           />
           <div className="chat-messages-list">
-            <div id="scroll-container" className="chat-messages-wrapper"> 
+            <div className="chat-messages-wrapper">
               {showMessages(readMessages as IMessage[])}
               {(unReadMessages as IMessage[]).length ? (
                 <>
@@ -90,9 +103,17 @@ const Chat = ({
                 </>
               ) : null}
             </div>
+            <div ref={messagesEndRef} />
           </div>
-          <MessageForm tradeId={activeTradeId} currentUserId={currentUserId} />
+          <MessageForm
+            tradeId={activeTradeId}
+            currentUserId={currentUserId}
+            interlocutorId={interlocutorId}
+          />
         </div>
+      ) : (
+        activeTradeId &&
+        !relatedTrade && <div>Trade with provided ID hasn't been found</div>
       )}
     </>
   );

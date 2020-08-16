@@ -6,7 +6,7 @@ export const useTimeout = (callback: () => void, initialDelay: number) => {
   const min = 30;
   const max = 120;
 
-  const getRandTimeValue = () => 
+  const getRandTimeValue = () =>
     Math.floor(Math.random() * (max - min + 1) + min);
 
   useEffect(() => {

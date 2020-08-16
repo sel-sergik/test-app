@@ -5,8 +5,11 @@ interface IStorageUser {
   role: number | undefined;
 }
 
-export const getCurrentUserFromStorage = () => localStorage.getItem('currentUser');
+export const getCurrentUserFromStorage = () =>
+  localStorage.getItem('currentUser');
 
-export const removeCurrentUserFromStorage = () => localStorage.removeItem('currentUser');
+export const removeCurrentUserFromStorage = () =>
+  localStorage.removeItem('currentUser');
 
-export const setCurrentUserToStorage = (user: IStorageUser) => localStorage.setItem('currentUser', JSON.stringify(user));
+export const setCurrentUserToStorage = (user: IStorageUser) =>
+  localStorage.setItem('currentUser', JSON.stringify(user));

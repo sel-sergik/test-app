@@ -8,12 +8,12 @@ interface IRoute {
 
 export const routesMap: IRouteMap = {
   home: {
-    route: '/'
+    route: '/',
   },
   tradeID: {
-    route: '/trade/:tradeID'
+    route: '/trade/:tradeID',
   },
   login: {
-    route: '/login'
+    route: '/login',
   },
 };

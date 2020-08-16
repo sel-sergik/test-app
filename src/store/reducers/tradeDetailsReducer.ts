@@ -1,5 +1,8 @@
 import { handleActions } from 'redux-actions';
-import { getTradeDetailsAction, clearTradeDetailsAction } from '@store/actions/tradesActions';
+import {
+  getTradeDetailsAction,
+  clearTradeDetailsAction,
+} from '@store/actions/tradesActions';
 
 export const tradeDetailsReducer = handleActions(
   {
