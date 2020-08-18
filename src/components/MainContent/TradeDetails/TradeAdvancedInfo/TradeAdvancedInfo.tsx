@@ -14,7 +14,7 @@ interface ITradeAdvancedInfoProps {
   buyerPosReputation: number;
   buyerNegReputation: number;
   buyerNumberOfTrades: number;
-  tradeIsPaid: boolean;
+  tradeIsPaid: boolean | undefined;
   tradeHash: string;
   amount: number;
 }

@@ -3,9 +3,9 @@ import React from 'react';
 import './TradeBaseInfo.scss';
 
 interface ITradeDetailsProps {
-  name: string;
+  name: string | undefined;
   buttonClick: () => void;
-  tradeIsPaid: boolean;
+  tradeIsPaid: boolean | undefined;
 }
 
 export const TradeBaseInfo = ({

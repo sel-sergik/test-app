@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PaymentMethods } from '@interfaces/PaymentMethods';
+import { PaymentMethods } from '@constants/PaymentMethods';
 
 import { PAYMENT_METHODS_NAMES } from '@constants/paymentMethodsNames';
 
@@ -8,7 +8,7 @@ import './ChatHeader.scss';
 
 interface IChatHeaderProps {
   paymentMethod: PaymentMethods;
-  interlocutorName: string;
+  interlocutorName: string | undefined;
   removeTradeHandler: () => void;
 }
 

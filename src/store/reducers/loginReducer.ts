@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
 
-import { setCurrentUserAction } from '@store/actions/loginActions';
+import * as actions from '@constants/actionTypes';
 
 export const loginReducer = handleActions(
   {
-    [`${setCurrentUserAction}`]: (state, { payload }) => payload,
+    [actions.SET_CURRENT_USER]: (state, { payload }) => payload,
   },
   null
 );

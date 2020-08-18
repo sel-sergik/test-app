@@ -1,4 +1,4 @@
-import { UserRoles } from '@interfaces/UserRoles';
+import { UserRoles } from './UserRoles';
 
 export const USER_ROLE_NAMES = {
   [UserRoles.BUYER]: 'Buyer',

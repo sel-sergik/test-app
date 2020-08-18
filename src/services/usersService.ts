@@ -1,7 +1,8 @@
 import { USERS } from '@mocks/mocks';
 
 import { IUser } from '@interfaces/IUser';
-import { UserRoles } from '@interfaces/UserRoles';
+
+import { UserRoles } from '@constants/UserRoles';
 
 export const findUser = (email: string, password: string) => {
   const user: IUser | undefined = USERS.find(

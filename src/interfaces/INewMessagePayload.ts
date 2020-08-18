@@ -1,4 +1,5 @@
-export interface IMessage {
+export interface INewMessagePayload {
+  tradeId: number;
   userId: number | undefined;
   message: string;
   time: string;

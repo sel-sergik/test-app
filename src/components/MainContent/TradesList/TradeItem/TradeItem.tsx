@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { IUser } from '@interfaces/IUser';
-import { PaymentMethods } from '@interfaces/PaymentMethods';
+import { PaymentMethods } from '@constants/PaymentMethods';
 
 import { calculateAmountBTC } from '@services/calculateAmountBTC';
 

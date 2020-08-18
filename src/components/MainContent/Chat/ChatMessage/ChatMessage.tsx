@@ -8,9 +8,9 @@ import './ChatMessage.scss';
 
 interface IChatMessageProps {
   currentUserId: number;
-  seller: IUser;
-  buyer: IUser;
-  userId: number;
+  seller: IUser | undefined;
+  buyer: IUser | undefined;
+  userId: number | undefined;
   message: string;
   time: string;
 }
@@ -23,8 +23,8 @@ export const ChatMessage = ({
   message,
   time,
 }: IChatMessageProps) => {
-  const { id: sellerId, avatar: sellerAvatar } = seller;
-  const { avatar: buyerAvatar } = buyer;
+  const { id: sellerId, avatar: sellerAvatar } = seller || {};
+  const { avatar: buyerAvatar } = buyer || {};
   const messageClass = useMemo(
     () =>
       `chat-message ${

@@ -70,16 +70,16 @@ export const TradeDetails = ({
             }`}
           >
             <TradeBaseInfo
-              name={buyer?.name as string}
+              name={buyer?.name}
               buttonClick={buttonClickHandler}
-              tradeIsPaid={tradeIsPaid as boolean}
+              tradeIsPaid={tradeIsPaid}
             />
             <TradeAdvancedInfo
               avatar={`/img/${buyer?.avatar}`}
               buyerPosReputation={buyerPosReputation}
               buyerNegReputation={buyerNegReputation}
               buyerNumberOfTrades={buyerNumberOfTrades}
-              tradeIsPaid={tradeIsPaid as boolean}
+              tradeIsPaid={tradeIsPaid}
               tradeHash={tradeHash}
               amount={amount}
             />

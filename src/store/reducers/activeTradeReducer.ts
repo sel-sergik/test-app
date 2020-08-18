@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
 
-import { setActiveTradeAction } from '@store/actions/tradesActions';
+import * as actions from '@constants/actionTypes';
 
 export const activeTradeReducer = handleActions(
   {
-    [`${setActiveTradeAction}`]: (state, { payload }) => payload,
+    [actions.SET_ACTIVE_TRADE]: (state, { payload }) => payload,
   },
   null
 );

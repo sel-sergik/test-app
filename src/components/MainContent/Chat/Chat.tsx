@@ -17,7 +17,6 @@ import {
 
 import { IMessage } from '@interfaces/IMessage';
 import { IUser } from '@interfaces/IUser';
-import { PaymentMethods } from '@interfaces/PaymentMethods';
 
 import { ChatMessage } from '@components/MainContent/Chat/ChatMessage/ChatMessage';
 import { ChatHeader } from '@components/MainContent/Chat/ChatHeader/ChatHeader';
@@ -43,8 +42,8 @@ const Chat = ({ currentUserId }: IChatProps) => {
   const interlocutorName = useSelector(
     interlocutorNameSelector(currentUserId, activeTradeId)
   );
-  const seller = relatedTrade?.seller as IUser;
-  const buyer = relatedTrade?.buyer as IUser;
+  const seller: IUser | undefined = relatedTrade?.seller;
+  const buyer = relatedTrade?.buyer;
   const interlocutorId = seller?.id === currentUserId ? buyer?.id : seller?.id;
 
   const removeTradeHandler = useCallback(() => {
@@ -56,7 +55,7 @@ const Chat = ({ currentUserId }: IChatProps) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const showMessages = (messages: Array<IMessage>) =>
+  const showMessages = (messages: Array<IMessage> | undefined) =>
     messages?.map((message, index) => {
       return (
         <ChatMessage
@@ -87,19 +86,19 @@ const Chat = ({ currentUserId }: IChatProps) => {
       {activeTradeId && relatedTrade ? (
         <div className="chat">
           <ChatHeader
-            paymentMethod={relatedTrade?.paymentMethod as PaymentMethods}
-            interlocutorName={interlocutorName as string}
+            paymentMethod={relatedTrade?.paymentMethod}
+            interlocutorName={interlocutorName}
             removeTradeHandler={removeTradeHandler}
           />
           <div className="chat-messages-list">
             <div className="chat-messages-wrapper">
-              {showMessages(readMessages as IMessage[])}
-              {(unReadMessages as IMessage[]).length ? (
+              {showMessages(readMessages)}
+              {unReadMessages!.length ? (
                 <>
                   <div className="unread-separator">
                     <span>New messages</span>
                   </div>
-                  {showMessages(unReadMessages as IMessage[])}
+                  {showMessages(unReadMessages)}
                 </>
               ) : null}
             </div>

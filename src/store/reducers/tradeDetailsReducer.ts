@@ -1,13 +1,11 @@
 import { handleActions } from 'redux-actions';
-import {
-  getTradeDetailsAction,
-  clearTradeDetailsAction,
-} from '@store/actions/tradesActions';
+
+import * as actions from '@constants/actionTypes';
 
 export const tradeDetailsReducer = handleActions(
   {
-    [`${getTradeDetailsAction}`]: (state, { payload }) => payload,
-    [`${clearTradeDetailsAction}`]: (state, { payload }) => {
+    [actions.GET_TRADE_DETAILS]: (state, { payload }) => payload,
+    [actions.CLEAR_TRADE_DETAILS]: (state, { payload }) => {
       return {};
     },
   },

@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
 
-import { setBTCRateAction } from '@store/actions/btcAction';
+import * as actions from '@constants/actionTypes';
 
 export const btcRateReducer = handleActions(
   {
-    [`${setBTCRateAction}`]: (state, { payload }) => payload,
+    [actions.SET_BTC_RATE]: (state, { payload }) => payload,
   },
   1
 );

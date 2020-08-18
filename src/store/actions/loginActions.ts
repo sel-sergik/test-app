@@ -1,3 +1,5 @@
 import { createAction } from 'redux-actions';
 
-export const setCurrentUserAction = createAction('SET_CURRENT_USER');
+import * as actions from '@constants/actionTypes';
+
+export const setCurrentUserAction = createAction(actions.SET_CURRENT_USER);

@@ -1,5 +1,5 @@
-import { UserRoles } from '@interfaces/UserRoles';
-import { PaymentMethods } from '@interfaces/PaymentMethods';
+import { UserRoles } from '@constants/UserRoles';
+import { PaymentMethods } from '@constants/PaymentMethods';
 
 export const USERS = [
   {

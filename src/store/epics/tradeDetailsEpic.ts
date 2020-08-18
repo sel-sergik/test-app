@@ -4,17 +4,22 @@ import { delay, mergeMap } from 'rxjs/operators';
 
 import {
   getTradeDetailsAction,
-  clearTradeDetailsAction,
+  clearTradeDetailsAction
 } from '@store/actions/tradesActions';
+
+import * as actions from '@constants/actionTypes';
 
 import { findTradeInfo } from '@services/tradeService';
 
-import { IActionWithPayload } from '@interfaces/IActionWithPayload';
+interface IRequestTradeDetailsAction {
+  type: string,
+  payload: number
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getTradeDetailsEpic: Epic<IActionWithPayload<any>> = (action$) =>
+export const getTradeDetailsEpic: Epic<IRequestTradeDetailsAction> = 
+(action$) =>
   action$.pipe(
-    ofType('REQUEST_TRADE_DETAILS'),
+    ofType(actions.REQUEST_TRADE_DETAILS),
     delay(1000),
     mergeMap((action) => {
       const tradeDetails = findTradeInfo(action.payload);

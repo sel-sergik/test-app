@@ -1,3 +1,5 @@
 import { createAction } from 'redux-actions';
 
-export const setBTCRateAction = createAction('SET_BTC_RATE');
+import * as actions from '@constants/actionTypes';
+
+export const setBTCRateAction = createAction(actions.SET_BTC_RATE);

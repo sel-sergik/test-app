@@ -1,4 +1,4 @@
-import { PaymentMethods } from '@interfaces/PaymentMethods';
+import { PaymentMethods } from './PaymentMethods';
 
 export const PAYMENT_METHODS_NAMES = {
   [PaymentMethods.AMAZON]: 'Amazon Gift Card',

@@ -1,5 +1,5 @@
 import { IUser } from '@interfaces/IUser';
-import { PaymentMethods } from '@interfaces/PaymentMethods';
+import { PaymentMethods } from '@constants/PaymentMethods';
 
 export interface ITrade {
   id: number;

@@ -1,39 +1,27 @@
-import { handleActions } from 'redux-actions';
+import { handleActions, Action } from 'redux-actions';
 
-import {
-  addMessageAction,
-  markMessagesAction,
-} from '@store/actions/tradesActions';
+import * as actions from '@constants/actionTypes';
 
 import { IChat } from '@interfaces/IChat';
+import { INewMessagePayload } from '@interfaces/INewMessagePayload';
+import { IMarkMessagePayload } from '@interfaces/IMarkMessagePayload';
 
 import { TRADE_CHATS } from '@mocks/mocks';
 
-interface INewMessagePayload {
-  tradeId: number;
-  userId: number;
-  message: string;
-  time: string;
-  isRead: boolean;
-}
-
-interface IMarkMessagePayload {
-  currentUserId: number;
-  tradeId: number;
-}
-
 const tradeChatsInitialState: Array<IChat> = TRADE_CHATS;
+type State = IChat[];
+type CombinedPayloads = INewMessagePayload | IMarkMessagePayload;
 
-export const tradeChatsReducer = handleActions(
+export const tradeChatsReducer = handleActions<State, CombinedPayloads>(
   {
-    [`${addMessageAction}`]: (state, { payload }) => {
+    [actions.ADD_MESSAGE]: (state, { payload }: Action<INewMessagePayload>) => {
       const {
         tradeId,
         userId,
         message,
         time,
         isRead,
-      } = (payload as unknown) as INewMessagePayload;
+      } = payload;
 
       return state.reduce((newState: IChat[], chat: IChat) => {
         newState.push(
@@ -49,7 +37,7 @@ export const tradeChatsReducer = handleActions(
         return newState;
       }, []);
     },
-    [`${markMessagesAction}`]: (state, { payload }) => {
+    [actions.MARK_MESSAGES]: (state, { payload }: Action<IMarkMessagePayload>) => {
       const {
         currentUserId,
         tradeId,

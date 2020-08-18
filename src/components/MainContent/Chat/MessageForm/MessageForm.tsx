@@ -31,7 +31,8 @@ export const MessageForm = ({
 }: IMessageFormProps) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
-  const [activeUserId, setActiveUserId] = useState(currentUserId);
+  const [activeUserId, setActiveUserId] = 
+    useState<number | undefined>(currentUserId);
 
   useEffect(() => {
     activeUserId === currentUserId &&
@@ -68,7 +69,7 @@ export const MessageForm = ({
 
   const userChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
     setActiveUserId(
-      event.target.checked ? (interlocutorId as number) : currentUserId
+      event.target.checked ? interlocutorId : currentUserId
     );
 
   return (

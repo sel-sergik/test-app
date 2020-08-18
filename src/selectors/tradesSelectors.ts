@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { isSeller } from '@services/usersService';
+
 import { ITrade } from '@interfaces/ITrade';
 import { ITradeDetails } from '@interfaces/ITradeDetails';
 import { IChat } from '@interfaces/IChat';
@@ -21,25 +22,17 @@ interface ITradeChatsState {
   tradeChats: Array<IChat>;
 }
 
-export const tradesSelector = createSelector(
-  (state: ITradesState) => state.trades,
-  (tradesList) => tradesList
-);
+export const tradesSelector = 
+  (state: ITradesState) => state.trades;
 
-export const activeTradeIdSelector = createSelector(
-  (state: IActiveTradeState) => state.activeTradeId,
-  (tradesList) => tradesList
-);
+export const activeTradeIdSelector = 
+  (state: IActiveTradeState) => state.activeTradeId;
 
-export const tradeDetailsSelector = createSelector(
-  (state: ITradeDetailsState) => state.tradeDetails,
-  (tradesList) => tradesList
-);
+export const tradeDetailsSelector = 
+  (state: ITradeDetailsState) => state.tradeDetails;
 
-export const tradeChatsSelector = createSelector(
-  (state: ITradeChatsState) => state.tradeChats,
-  (tradesList) => tradesList
-);
+export const tradeChatsSelector = 
+  (state: ITradeChatsState) => state.tradeChats;
 
 export const tradeIsPaidSelector = (tradeId: number) =>
   createSelector(
