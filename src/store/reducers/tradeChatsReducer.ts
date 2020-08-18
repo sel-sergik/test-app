@@ -1,4 +1,4 @@
-import { handleActions, Action } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 import * as actions from '@constants/actionTypes';
 
@@ -8,13 +8,13 @@ import { IMarkMessagePayload } from '@interfaces/IMarkMessagePayload';
 
 import { TRADE_CHATS } from '@mocks/mocks';
 
-const tradeChatsInitialState: Array<IChat> = TRADE_CHATS;
+const tradeChatsInitialState: IChat[] = TRADE_CHATS;
 type State = IChat[];
-type CombinedPayloads = INewMessagePayload | IMarkMessagePayload;
+type CombinedPayloads = INewMessagePayload & IMarkMessagePayload;
 
 export const tradeChatsReducer = handleActions<State, CombinedPayloads>(
   {
-    [actions.ADD_MESSAGE]: (state, { payload }: Action<INewMessagePayload>) => {
+    [actions.ADD_MESSAGE]: (state, { payload }) => {
       const {
         tradeId,
         userId,
@@ -37,11 +37,11 @@ export const tradeChatsReducer = handleActions<State, CombinedPayloads>(
         return newState;
       }, []);
     },
-    [actions.MARK_MESSAGES]: (state, { payload }: Action<IMarkMessagePayload>) => {
+    [actions.MARK_MESSAGES]: (state, { payload }) => {
       const {
         currentUserId,
         tradeId,
-      } = (payload as unknown) as IMarkMessagePayload;
+      } = payload;
 
       return state.reduce((newState: IChat[], chat: IChat) => {
         newState.push(
