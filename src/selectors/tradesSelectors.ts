@@ -7,7 +7,7 @@ import { ITradeDetails } from '@interfaces/ITradeDetails';
 import { IChat } from '@interfaces/IChat';
 
 interface ITradesState {
-  trades: Array<ITrade>;
+  trades: ITrade[];
 }
 
 interface IActiveTradeState {
@@ -19,7 +19,7 @@ interface ITradeDetailsState {
 }
 
 interface ITradeChatsState {
-  tradeChats: Array<IChat>;
+  tradeChats: IChat[];
 }
 
 export const tradesSelector = 

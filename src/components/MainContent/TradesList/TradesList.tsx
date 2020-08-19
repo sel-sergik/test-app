@@ -26,7 +26,7 @@ export const TradesList = () => {
   const [open, setOpen] = useState(false);
   const { id: currentUserId } = useSelector(currentUserSelector);
   const activeTradeId = useSelector(activeTradeIdSelector);
-  const yourTrades: Array<ITrade> = useSelector(
+  const yourTrades: ITrade[] = useSelector(
     tradesByUserSelector(currentUserId)
   );
   const btcRate = useSelector(btcRateSelector);

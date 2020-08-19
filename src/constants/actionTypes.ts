@@ -11,3 +11,4 @@ export const REMOVE_TRADE = 'REMOVE_TRADE';
 export const GET_TRADE_CHATS = 'GET_TRADE_CHATS';
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const MARK_MESSAGES = 'MARK_MESSAGES';
+export const REQUEST_PRICE = 'REQUEST_PRICE';

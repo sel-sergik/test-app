@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { IUser } from '@interfaces/IUser';
@@ -27,7 +27,7 @@ interface ITradeProps {
   tradeClick: (tradeId: number) => void;
 }
 
-export const TradeItem = ({
+export const TradeItem = React.memo(({
   id,
   buyer,
   seller,
@@ -43,36 +43,20 @@ export const TradeItem = ({
     chatUnreadMessagesSelector(id, currentUserId)
   );
   const hasUnReadMessages = unReadMessages?.length;
-  const paid = useMemo(() => (isPaid ? 'Paid' : 'Not Paid'), [isPaid]);
-  const isBuyer = useMemo(() => buyer.id === currentUserId, [
-    buyer,
-    currentUserId,
-  ]);
-  const avatar = useMemo(
-    () => `/img/${isBuyer ? seller.avatar : buyer.avatar}`,
-    [isBuyer, seller, buyer]
-  );
-  const cardClass = useMemo(
-    () => `trade-item${id === activeTradeId ? ' trade-item--active' : ''}`,
-    [id, activeTradeId]
-  );
-  const paidClass = useMemo(
-    () => `trade-item__paid${isPaid ? ' trade-item__paid--active' : ''}`,
-    [isPaid]
-  );
-  const indicatorClass = useMemo(
-    () =>
-      `trade-item__messages-indicator${
-        hasUnReadMessages ? ' has-messages' : ''
-      }`,
-    [hasUnReadMessages]
-  );
+  const paid = isPaid ? 'Paid' : 'Not Paid';
+  const isBuyer = buyer.id === currentUserId;
+  const avatar = `/img/${isBuyer ? seller.avatar : buyer.avatar}`;
+  const cardClass = `trade-item${id === activeTradeId ? ' trade-item--active' : ''}`;
+  const paidClass = `trade-item__paid${isPaid ? ' trade-item__paid--active' : ''}`;
+  const indicatorClass = `trade-item__messages-indicator${
+    hasUnReadMessages ? ' has-messages' : ''
+  }`;
   const amountValue = useMemo(
     () => `${amount} USD (${calculateAmountBTC(amount, btcRate)} BTC)`,
     [amount, btcRate]
   );
 
-  const clickHandler = useCallback(() => tradeClick(id), [id, tradeClick]);
+  const clickHandler = () => tradeClick(id);
 
   return (
     <div
@@ -105,4 +89,4 @@ export const TradeItem = ({
       </div>
     </div>
   );
-};
+});

@@ -12,7 +12,7 @@ export const tradesReducer = handleActions<State, CombinedPayloads>(
   {
     [actions.GET_TRADES]: (state, { payload }) => payload,
     [actions.UPDATE_TRADES]: (state, { payload }) =>
-      state.reduce((newState: Array<ITrade>, trade: ITrade) => {
+      state.reduce((newState: ITrade[], trade: ITrade) => {
         newState.push(
           trade.id === payload ? { ...trade, isPaid: true } : trade
         );

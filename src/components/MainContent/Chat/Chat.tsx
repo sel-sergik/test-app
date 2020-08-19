@@ -16,7 +16,6 @@ import {
 } from '@store/actions/tradesActions';
 
 import { IMessage } from '@interfaces/IMessage';
-import { IUser } from '@interfaces/IUser';
 
 import { ChatMessage } from '@components/MainContent/Chat/ChatMessage/ChatMessage';
 import { ChatHeader } from '@components/MainContent/Chat/ChatHeader/ChatHeader';
@@ -42,7 +41,7 @@ const Chat = ({ currentUserId }: IChatProps) => {
   const interlocutorName = useSelector(
     interlocutorNameSelector(currentUserId, activeTradeId)
   );
-  const seller: IUser | undefined = relatedTrade?.seller;
+  const seller = relatedTrade?.seller;
   const buyer = relatedTrade?.buyer;
   const interlocutorId = seller?.id === currentUserId ? buyer?.id : seller?.id;
 
@@ -55,7 +54,7 @@ const Chat = ({ currentUserId }: IChatProps) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const showMessages = (messages: Array<IMessage> | undefined) =>
+  const showMessages = (messages: IMessage[] | undefined) =>
     messages?.map((message, index) => {
       return (
         <ChatMessage

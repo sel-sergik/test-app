@@ -8,7 +8,7 @@ interface ITradeDetailsProps {
   tradeIsPaid: boolean | undefined;
 }
 
-export const TradeBaseInfo = ({
+export const TradeBaseInfo = React.memo(({
   name,
   buttonClick,
   tradeIsPaid,
@@ -30,4 +30,4 @@ export const TradeBaseInfo = ({
       </button>
     </>
   );
-};
+});

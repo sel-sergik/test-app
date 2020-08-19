@@ -16,7 +16,7 @@ export const history: History = createBrowserHistory();
 const epicMiddleware = createEpicMiddleware();
 
 export const configureStore = (): Store<AppState> => {
-  const middlewares: Array<Middleware> = [
+  const middlewares: Middleware[] = [
     routerMiddleware(history),
     epicMiddleware,
   ];

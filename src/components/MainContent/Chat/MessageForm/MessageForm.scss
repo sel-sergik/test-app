@@ -17,6 +17,10 @@
     padding-right: 50px;
     box-sizing: border-box;
 
+    &:focus {
+      outline: none;
+    }
+
     &[type='checkbox'] {
       width: 20px;
       height: 20px;

@@ -1,8 +1,5 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { of } from 'rxjs';
-import { fromFetch } from 'rxjs/fetch';
-import { switchMap, catchError } from 'rxjs/operators';
 
 import { ITradeDetails } from '@interfaces/ITradeDetails';
 import { IUser } from '@interfaces/IUser';
@@ -16,7 +13,7 @@ import { MemoizedChat } from '@components/MainContent/Chat/Chat';
 
 import { setActiveTradeAction } from '@store/actions/tradesActions';
 import { setCurrentUserAction } from '@store/actions/loginActions';
-import { setBTCRateAction } from '@store/actions/btcAction';
+import { requestPriceAction } from '@store/actions/btcAction';
 
 import { isObjectEmpty } from '@services/sharedService';
 import { getCurrentUserFromStorage } from '@services/storageService';
@@ -38,9 +35,7 @@ export const MainContent: React.FC<IMainContentProps> = ({ match }) => {
   const currentUser: IUser = useSelector(currentUserSelector);
   const tradeDetails: ITradeDetails = useSelector(tradeDetailsSelector);
   const currentUserFromLocalStorage = getCurrentUserFromStorage();
-  const tradeDetailsExist = useMemo(() => !isObjectEmpty(tradeDetails), [
-    tradeDetails,
-  ]);
+  const tradeDetailsExist = !isObjectEmpty(tradeDetails);
 
   useEffect(() => {
     const tradeId = Number(match?.tradeID);
@@ -55,25 +50,7 @@ export const MainContent: React.FC<IMainContentProps> = ({ match }) => {
   }, [currentUser, currentUserFromLocalStorage, dispatch]);
 
   useTimeout(() => {
-    const price$ = fromFetch(
-      'https://api.coindesk.com/v1/bpi/currentprice/USD.json'
-    ).pipe(
-      switchMap((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return of({ error: true, message: `Error ${response.status}` });
-      }),
-      catchError((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err);
-        return of({ error: true, message: err.message });
-      })
-    );
-
-    price$.subscribe((priceData) =>
-      dispatch(setBTCRateAction(priceData.bpi.USD.rate_float))
-    );
+    dispatch(requestPriceAction());
   }, 0);
 
   return (

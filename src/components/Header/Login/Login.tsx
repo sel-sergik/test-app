@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 
@@ -21,13 +21,13 @@ export const Login = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(currentUserSelector);
 
-  const logoutHandler = useCallback(() => {
+  const logoutHandler = () => {
     removeCurrentUserFromStorage();
     dispatch(setCurrentUserAction(null));
     dispatch(setActiveTradeAction(null));
     dispatch(clearTradeDetailsAction());
     history.push('/');
-  }, [dispatch, history]);
+  };
 
   return (
     <div className="login-action">

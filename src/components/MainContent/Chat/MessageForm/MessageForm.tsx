@@ -3,7 +3,6 @@ import React, {
   useCallback,
   SyntheticEvent,
   ChangeEvent,
-  useMemo,
   useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
@@ -34,6 +33,10 @@ export const MessageForm = ({
   const [activeUserId, setActiveUserId] = 
     useState<number | undefined>(currentUserId);
 
+  const validateForm = () => message.length > 0;
+
+  const formIsInvalid = !validateForm();
+
   useEffect(() => {
     activeUserId === currentUserId &&
       setTimeout(
@@ -41,10 +44,6 @@ export const MessageForm = ({
         3000
       );
   }, [activeUserId, currentUserId, tradeId, dispatch]);
-
-  const validateForm = useCallback(() => message.length > 0, [message]);
-
-  const formIsInvalid = useMemo(() => !validateForm(), [validateForm]);
 
   const handleSubmit = useCallback(
     (event: SyntheticEvent) => {

@@ -12,7 +12,7 @@ interface IChatHeaderProps {
   removeTradeHandler: () => void;
 }
 
-export const ChatHeader = ({
+export const ChatHeader = React.memo(({
   paymentMethod,
   interlocutorName,
   removeTradeHandler,
@@ -36,4 +36,4 @@ export const ChatHeader = ({
       <p className="chat-header__interlocutor-name">{interlocutorName}</p>
     </div>
   </div>
-);
+));
