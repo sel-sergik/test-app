@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -16,10 +16,10 @@ import './Header.scss';
 export const Header = () => {
   const dispatch = useDispatch();
 
-  const logoClickHandler = () => {
+  const logoClickHandler = useCallback(() => {
     dispatch(setActiveTradeAction(null));
     dispatch(clearTradeDetailsAction());
-  };
+  }, [dispatch]);
 
   return (
     <header>
